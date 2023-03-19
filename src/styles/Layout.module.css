@@ -1,0 +1,27 @@
+.headerStyle {
+  background-color: #7dbcea;
+  color: #fff;
+  height: 60px;
+  line-height: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+.contentStyle {
+  background-color: #108ee9;
+  color: #fff;
+  line-height: 120px;
+  max-height: calc(100vh - 120px);
+  min-height: 500px;
+  text-align: center;
+  overflow: auto;
+  padding: 30px;
+}
+
+.footerStyle {
+  background-color: #7dbcea;
+  color: #fff;
+  height: 60px;
+  padding: 20px;
+  text-align: center;
+}
