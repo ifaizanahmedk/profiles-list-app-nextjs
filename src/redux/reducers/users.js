@@ -44,11 +44,9 @@ const usersReducers = (state = initialState, action = {}) => {
     case actionTypes.EDIT_USER: {
       return {
         ...state,
-        users: state.users.map((user) => {
-          console.log(action?.payload);
-          user.id === action?.payload?.id ? { ...user, ...action.payload } : user;
-        })
-        // editingUser: action?.payload
+        users: state.users.map((user) =>
+          user.id === action?.payload?.id ? { ...user, ...action.payload } : user
+        )
       };
     }
 

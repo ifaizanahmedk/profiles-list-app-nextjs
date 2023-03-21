@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Modal } from 'antd';
 
-const EditUser = ({ user, isEditUserModalOpen, onEdit, onCancel }) => {
+function EditUser({ user, isEditUserModalOpen, onEdit, onCancel }) {
   const [form] = Form.useForm();
-  const [editUser, setEditUser] = useState({});
-  // const { id, email, name, phone, website } = user;
-
-  console.log('Edit User initialState', editUser);
 
   useEffect(() => {
-    setEditUser(user);
-  }, [user]);
+    if (isEditUserModalOpen) form.setFieldValue(user);
+  }, [isEditUserModalOpen]);
 
   return (
     <Modal
@@ -25,10 +21,11 @@ const EditUser = ({ user, isEditUserModalOpen, onEdit, onCancel }) => {
           .validateFields()
           .then((values) => {
             form.resetFields();
-            onEdit({ ...values, id: editUser?.id });
+            onEdit({ ...values, id: user?.id });
           })
           .catch((err) => {
-            console.log('Validate Failed:', err);
+            // eslint-disable-next-line no-alert
+            alert('Validate Failed:', err);
           });
       }}>
       <Form
@@ -36,10 +33,10 @@ const EditUser = ({ user, isEditUserModalOpen, onEdit, onCancel }) => {
         layout="vertical"
         name="edit_user_form"
         initialValues={{
-          name: editUser?.name,
-          email: editUser?.email,
-          phone: editUser?.phone,
-          website: editUser?.website
+          name: user?.name,
+          email: user?.email,
+          phone: user?.phone,
+          website: user?.website
         }}>
         <Form.Item
           name="name"
@@ -72,7 +69,7 @@ const EditUser = ({ user, isEditUserModalOpen, onEdit, onCancel }) => {
       </Form>
     </Modal>
   );
-};
+}
 
 EditUser.propTypes = {
   user: PropTypes.shape({

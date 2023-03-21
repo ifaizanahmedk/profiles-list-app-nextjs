@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
 
@@ -9,21 +9,17 @@ import { editUser } from '@/redux/actions/users';
 
 function Users({ users }) {
   const dispatch = useDispatch();
-  // const editingUser = useSelector((state) => state.users.editingUser);
   const [editingUser, setEditingUser] = useState({});
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
 
   const handleUpdateUser = (values) => {
-    console.log('Received values of form: ', values);
     dispatch(editUser(values));
     setIsEditUserModalOpen(false);
   };
 
   const handleEditUser = (user) => {
-    // console.log('Before Edit in Users.js', user);
     setEditingUser(user);
     setIsEditUserModalOpen(true);
-    // console.log('After Edit in Users.js', user);
   };
 
   return (
@@ -45,9 +41,9 @@ function Users({ users }) {
           md: 24,
           lg: 32
         }}>
-        {users?.map((user, index) => (
+        {users?.map((user) => (
           <Col
-            key={index}
+            key={user.id}
             className="gutter-row"
             xs={{
               span: 24
@@ -70,11 +66,11 @@ function Users({ users }) {
 }
 
 Users.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape())
+  users: PropTypes.arrayOf(PropTypes.shape())
 };
 
 Users.defaultProps = {
-  data: []
+  users: []
 };
 
 export default Users;
